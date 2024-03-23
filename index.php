@@ -2,7 +2,7 @@
 session_start();
 include 'config.php';
 // product all
-$query = mysqli_query($conn, "SELECT * from products");
+$query = mysqli_query($conn, "SELECT * from products order by brand, price desc");
 $rows = mysqli_num_rows($query);
 
 // variable for product form
@@ -92,18 +92,18 @@ if (!empty($_GET['id'])) {
     <!-- End Form Submit Alert -->
 
     <!-- Form -->
-    <form action="product-form.php" method="post" enctype="multipart/form-data">
+    <form action="product-form.php" method="post" enctype="multipart/form-data" autocomplete="off">
         <input type="hidden" name="id" value="<?php echo $result['id']; ?>">
         <h4 class="pb-2 m-5">Manage Product</h4>
         <!-- product_name -->
         <label class="form-label">
             Product Name:
-            <input type="text" name="product_name" class="form-control" value="<?php echo $result['product_name']; ?>">
+            <input type="text" name="product_name" class="form-control" value="<?php echo $result['product_name']; ?>" required>
         </label>
         <!-- price -->
         <label class="form-label">
             Price:
-            <input type="text" name="price" class="form-control" value="<?php echo $result['price']; ?>">
+            <input type="text" name="price" class="form-control" value="<?php echo $result['price']; ?>" required>
         </label>
         <!-- profile_image -->
         <?php if (!empty($result['profile_image'])) : ?>
@@ -117,7 +117,7 @@ if (!empty($_GET['id'])) {
         <label class="form-label">
             Brand:
             <div class="dropdown">
-                <select name = "brand" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <select name = "brand" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" required>
                     <option value="" selected hidden>Select Brand</option>
                     <option value="mama">mama</option>
                     <option value="waiwai">waiwai</option>
@@ -145,6 +145,7 @@ if (!empty($_GET['id'])) {
                     <th>Image</th>
                     <th>Product Name</th>
                     <th>Price</th>
+                    <th>Brand</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -164,6 +165,9 @@ if (!empty($_GET['id'])) {
                             </td>
                             <td>
                                 <?php echo number_format($product['price'], 2); ?>
+                            </td>
+                            <td>
+                                <?php echo $product['brand']; ?>
                             </td>
                             <td>
                                 <a role="button" href="index.php?id=<?php echo $product['id']; ?>" class="btn btn-outline-dark">Edit</a>

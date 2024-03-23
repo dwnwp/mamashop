@@ -113,14 +113,14 @@ if (!empty($_GET['id'])) {
                     <div class="col">
                         <div class="card text-center mb-3 w-55 p-5">
                             <?php if (!empty($product['profile_image'])) : ?>
-                                <img src="<?php echo $base_url; ?>/img/<?php echo $product['profile_image']; ?>" class="card-img-top" alt="...">
+                                <img src="<?php echo $base_url; ?>/img/<?php echo $product['profile_image']; ?>" class="card-img-top" alt="..." style="width:auto !important; height: 140px !important; margin: 0 auto 1em auto;">
                             <?php else : ?>
-                                <img src="https://st3.depositphotos.com/23594922/31822/v/450/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg" class="card-img-top" alt="...">
+                                <img src="https://st3.depositphotos.com/23594922/31822/v/450/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg" class="card-img-top" alt="..." style="width:auto !important; height: 140px !important; margin: 0 auto 1em auto;">
                             <?php endif; ?>
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $product['product_name']; ?></h5>
-                                <h6 class="card-title" style="color: green"><?php echo number_format($product['price'], 2); ?></h6>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h6 class="card-title" style="color: green"><?php echo number_format($product['price'], 2); ?> ฿</h6>
+                                <a href="001.php?id=<?php echo $product['id']; ?>" class="btn btn-primary">Order Now</a>
                             </div>
                         </div>
                     </div>

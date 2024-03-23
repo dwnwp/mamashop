@@ -6,5 +6,5 @@ $user = 'root';
 $password = '';
 $db = 'shoppingcart';
 
-$conn = mysqli_connect($host, $user, $password, $db) or die('Connection Failed');
+$conn = mysqli_connect($host, $user, $password, $db, 3308) or die('Connection Failed');
 ?>
