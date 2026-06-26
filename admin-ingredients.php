@@ -1,22 +1,26 @@
 <?php
 session_start();
 include 'config.php';
-// product all
+// Check if login
+if(empty($_SESSION['login'])){
+    header("Location: " . $base_url . "/login.php");
+}
+// All Ingredients
 $query = mysqli_query($conn, "SELECT * from ingredients ORDER BY type");
 $rows = mysqli_num_rows($query);
 
-// variable for product form
-$ingredients = ['id' => '', 'name' => '', 'quantity' => '', 'type' => ''];
+// variable
+$ingredients = ['id' => '', 'name' => '', 'name_en' => '', 'quantity' => '', 'price' => '', 'type' => ''];
 
-// product select edit
+// When press edit ingredients
 if (!empty($_GET['id'])) {
-    $query = mysqli_query($conn, "select * from ingredients where id='{$_GET['id']}'");
-    $rows = mysqli_num_rows($query);
+    $query2 = mysqli_query($conn, "SELECT * from ingredients where id='{$_GET['id']}'");
+    $rows = mysqli_num_rows($query2);
 
     if ($rows == 0) {
         header('location:' . $base_url . '/admin-ingredients.php');
     }
-    $ingredients = mysqli_fetch_assoc($query);
+    $ingredients = mysqli_fetch_assoc($query2);
 }
 
 ?>
@@ -27,38 +31,40 @@ if (!empty($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MamaShop</title>
+    <title>Admin - Ingredients</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font.css">
 </head>
 
 <body>
 
     <?php include 'admin-navbar.php'; ?>
 
-    <!-- Form Submit Alert -->
-    <?php if (!empty($_SESSION['message'])) : ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <?php echo $_SESSION['message']; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php unset($_SESSION['message']) ?>
-    <?php endif; ?>
-    <!-- End Form Submit Alert -->
-
     <!-- Form -->
     <form action="ingredients-form.php" method="post" autocomplete="off">
+        <div class="container">
         <input type="hidden" name="id" value="<?php echo $ingredients['id']; ?>">
-        <h4 class="pb-2 m-5">Manage Ingredients</h4>
+        <h4 class="pb-2 m-5">จัดการวัตถุดิบ</h4>
         <!-- _name -->
         <label class="form-label">
             Name:
             <input type="text" name="name" class="form-control" value="<?php echo $ingredients['name']; ?>" required>
         </label>
+        <!-- _name en -->
+        <label class="form-label">
+            Name_en:
+            <input type="text" name="name_en" class="form-control" value="<?php echo $ingredients['name_en']; ?>" required>
+        </label>
         <!-- quantity -->
         <label class="form-label">
             Quantity:
-            <input type="number" name="quantity" class="form-control" value="<?php echo $ingredients['quantity']; ?>" required>
+            <input type="number" min=0 name="quantity" class="form-control" value="<?php echo $ingredients['quantity']; ?>" required>
+        </label>
+        <!-- price -->
+        <label class="form-label">
+            Price:
+            <input type="number" name="price" min=0 class="form-control" value="<?php echo $ingredients['price']; ?>" required>
         </label>
         <!-- type -->
         <label class="form-label">
@@ -80,6 +86,7 @@ if (!empty($_GET['id'])) {
         <?php endif; ?>
         <a role="button" class="btn btn-secondary" href="admin-ingredients.php">Cancel</a>
         <hr class="my-4">
+        </div>
     </form>
     <!-- End Form -->
 
@@ -89,7 +96,9 @@ if (!empty($_GET['id'])) {
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Name_en</th>
                     <th>Quantity</th>
+                    <th>Price</th>
                     <th>Type</th>
                     <th>Action</th>
                 </tr>
@@ -102,7 +111,13 @@ if (!empty($_GET['id'])) {
                                 <?php echo $product['name']; ?>
                             </td>
                             <td>
+                                <?php echo $product['name_en']; ?>
+                            </td>
+                            <td>
                                 <?php echo $product['quantity']; ?>
+                            </td>
+                            <td>
+                                <?php echo $product['price']; ?>
                             </td>
                             <td>
                                 <?php echo $product['type']; ?>
