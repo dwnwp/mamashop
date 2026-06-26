@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 
 $query = mysqli_query($conn, "SELECT * from products where stock>5 order by rand(product_name) limit 4");
 $rows = mysqli_num_rows($query);
@@ -13,16 +13,16 @@ $rows = mysqli_num_rows($query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <title>MamaShop</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/carousel.css">
-    <link rel="stylesheet" href="css/feature.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/carousel.css">
+    <link rel="stylesheet" href="../css/feature.css">
+    <link rel="stylesheet" href="../css/font.css">
 </head>
 
 <header>
-    <?php include 'navbar.php'; ?>
+    <?php include '../navbar.php'; ?>
 </header>
 
 <body>
@@ -45,7 +45,7 @@ $rows = mysqli_num_rows($query);
                         } else {
                             echo "Please Contract 08X-XXX-XXXX";
                         } ?></p>
-                    <p><a href="001.php?id=<?php echo $product['id']; ?>" class="btn btn-primary bg-dark border-dark btn-lg"><span style="color:white"><?php if ($_SESSION['lang'] == 'th') {
+                    <p><a href="product-detail.php?id=<?php echo $product['id']; ?>" class="btn btn-primary bg-dark border-dark btn-lg"><span style="color:white"><?php if ($_SESSION['lang'] == 'th') {
                                                                                                                                                             echo "กดเลย";
                                                                                                                                                         } else {
                                                                                                                                                             echo "Click Here";
@@ -69,7 +69,7 @@ $rows = mysqli_num_rows($query);
                 <?php while ($product = mysqli_fetch_assoc($query)) : ?>
                     <div class="col">
                         <div class="card text-center mb-3 w-55 p-4 h-100">
-                            <a href="001.php?id=<?php echo $product['id']; ?>">
+                            <a href="product-detail.php?id=<?php echo $product['id']; ?>">
                                 <?php if (!empty($product['profile_image'])) : ?>
                                     <img src="<?php echo $base_url; ?>/img/<?php echo $product['profile_image']; ?>" class="card-img-top" alt="..." style="width:auto !important; height: 140px !important; margin: 0 auto 1em auto;">
                                 <?php else : ?>
@@ -94,9 +94,9 @@ $rows = mysqli_num_rows($query);
     <!-- End Recommand -->
 
 
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 
-<?php include 'footer.php'; ?>
+<?php include '../footer.php'; ?>
 
 </html>

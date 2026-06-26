@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 
 $result = ['id' => '', 'product_name' => '', 'price' => '', 'profile_image' => '', 'brand' => ''];
 $query_product = mysqli_query($conn, "SELECT * from products where id='{$_GET['id']}'");
@@ -16,15 +16,15 @@ $result = mysqli_fetch_assoc($query_product);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <title><?php if($_SESSION['lang']=='th'){echo $result['product_name'];}elseif($_SESSION['lang']=='en'){echo $result['product_name_en'];} ?></title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font.css">
 </head>
 
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <?php include '../navbar.php'; ?>
 
     <!-- Info -->
     <div class="container">
@@ -49,7 +49,7 @@ $result = mysqli_fetch_assoc($query_product);
                 </div>
                 <div class="col">
                     <!-- Form -->
-                    <form action="cart-add.php" method="post" autocomplete="off">
+                    <form action="../actions/cart-add.php" method="post" autocomplete="off">
                         <div class="container">
                             <p class="text-center mt-5 fs-2 fw-semibold"><?php if ($_SESSION['lang'] == 'th') {
                                                                                 echo $result['product_name'];
@@ -121,7 +121,7 @@ $result = mysqli_fetch_assoc($query_product);
                                     <!-- End Select Topping -->
                                     <p class="text-center fs-4 fw-semibold mt-5 text-success"><?php if($_SESSION['lang']=='th'){echo "ราคาเริ่มต้น";}else{echo "Starting Price";}?> <?php echo $result['price']; ?> ฿</p>
                                     <div class="d-grid gap-2 col-6 mx-auto mb-5">
-                                        <button class="btn btn-dark shadow" type="submit" onclick="location.href='cart-add.php?id=<?php echo $result['id']; ?>';" name="submit"><?php if ($_SESSION['lang'] == 'th') {
+                                        <button class="btn btn-dark shadow" type="submit" onclick="location.href='../actions/cart-add.php?id=<?php echo $result['id']; ?>';" name="submit"><?php if ($_SESSION['lang'] == 'th') {
                                                                                                                                                                                             echo "ใส่ตะกร้า";
                                                                                                                                                                                         } else {
                                                                                                                                                                                             echo "Add To Cart";
@@ -139,6 +139,6 @@ $result = mysqli_fetch_assoc($query_product);
 
 </body>
 
-<?php include 'footer.php'; ?>
+<?php include '../footer.php'; ?>
 
 </html>

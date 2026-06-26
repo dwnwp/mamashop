@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 
 $result = ['id' => '', 'product_name' => '', 'price' => '', 'profile_image' => '', 'brand' => ''];
 
@@ -25,21 +25,21 @@ $rows = mysqli_num_rows($query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <title>Cart</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font.css">
 </head>
 
 <body>
 
-    <?php include 'navbar.php' ?>
+    <?php include '../navbar.php' ?>
 
     <?php if (!empty($_SESSION['cart'])) : ?>
         <div class="container mt-5">
             <div class="container text-center">
                 <div class="row">
-                    <form action="cart-update.php" method="post" name="fromupdate">
+                    <form action="../actions/cart-update.php" method="post" name="fromupdate">
                         <?php if ($_SESSION['lang'] == 'th') : ?>
                             <table class="table table-bordered">
                                 <thead>
@@ -74,7 +74,7 @@ $rows = mysqli_num_rows($query);
                                                 <?php echo number_format($_SESSION['price'][$result['id']] * $_SESSION['cart'][$result['id']], 2); ?> ฿
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger btn-lg" href="cart-delete.php?id=<?php echo $result['id']; ?>" role="button" onclick="return confirm('Are you sure you want to delete?');">
+                                                <a class="btn btn-danger btn-lg" href="../actions/cart-delete.php?id=<?php echo $result['id']; ?>" role="button" onclick="return confirm('Are you sure you want to delete?');">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                     ลบทิ้ง</a>
                                             </td>
@@ -86,9 +86,9 @@ $rows = mysqli_num_rows($query);
                             <!-- ส่วนท้าย -->
                             <h4 class="text-lg-end mt-5">จำนวนเงินรวมทั้งหมด <?php echo number_format($grand_total, 2); ?> บาท</h4>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                                <a href="cart-clear.php" class="btn btn-danger btn-lg" onclick="return confirm('คุณแน่ใจใช่ไหมว่าจะเคลียร์สินค้าทั้งหมดในตะกร้า')">เคลียร์ตะกร้า</a>
+                                <a href="../actions/cart-clear.php" class="btn btn-danger btn-lg" onclick="return confirm('คุณแน่ใจใช่ไหมว่าจะเคลียร์สินค้าทั้งหมดในตะกร้า')">เคลียร์ตะกร้า</a>
                                 <button type="submit" class="btn btn-secondary btn-lg">คำนวณราคาสินค้าใหม่</button>
-                                <a href="cart-order.php" type="button" class="btn btn-success btn-lg">สั่งซื้อสินค้า</a>
+                                <a href="../actions/cart-order.php" type="button" class="btn btn-success btn-lg">สั่งซื้อสินค้า</a>
                             </div>
                             <!-- จบส่วนท้าย -->
                         <?php elseif ($_SESSION['lang'] == 'en') : ?>
@@ -125,7 +125,7 @@ $rows = mysqli_num_rows($query);
                                                 <?php echo number_format($_SESSION['price'][$result['id']] * $_SESSION['cart'][$result['id']], 2); ?> ฿
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger btn-lg" href="cart-delete.php?id=<?php echo $result['id']; ?>" role="button" onclick="return confirm('Are you sure you want to delete?');">
+                                                <a class="btn btn-danger btn-lg" href="../actions/cart-delete.php?id=<?php echo $result['id']; ?>" role="button" onclick="return confirm('Are you sure you want to delete?');">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                     Delete</a>
                                             </td>
@@ -137,9 +137,9 @@ $rows = mysqli_num_rows($query);
                             <!-- ส่วนท้าย -->
                             <h4 class="text-lg-end mt-5">Grand Total Price <?php echo number_format($grand_total, 2); ?> Baht</h4>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                                <a href="cart-clear.php" class="btn btn-danger btn-lg" onclick="return confirm('Are you sure you want to clear the cart?')">Clear</a>
+                                <a href="../actions/cart-clear.php" class="btn btn-danger btn-lg" onclick="return confirm('Are you sure you want to clear the cart?')">Clear</a>
                                 <button type="submit" class="btn btn-secondary btn-lg">Recalculate the price</button>
-                                <a href="cart-order.php" type="button" class="btn btn-success btn-lg">Submit Order</a>
+                                <a href="../actions/cart-order.php" type="button" class="btn btn-success btn-lg">Submit Order</a>
                             </div>
                             <!-- จบส่วนท้าย -->
                         <?php endif; ?>

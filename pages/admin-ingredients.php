@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 // Check if login
 if(empty($_SESSION['login'])){
-    header("Location: " . $base_url . "/login.php");
+    header("Location: " . $base_url . "/pages/login.php");
 }
 // All Ingredients
 $query = mysqli_query($conn, "SELECT * from ingredients ORDER BY type");
@@ -18,7 +18,7 @@ if (!empty($_GET['id'])) {
     $rows = mysqli_num_rows($query2);
 
     if ($rows == 0) {
-        header('location:' . $base_url . '/admin-ingredients.php');
+        header('location:' . $base_url . '/pages/admin-ingredients.php');
     }
     $ingredients = mysqli_fetch_assoc($query2);
 }
@@ -33,16 +33,16 @@ if (!empty($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Ingredients</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font.css">
 </head>
 
 <body>
 
-    <?php include 'admin-navbar.php'; ?>
+    <?php include '../admin-navbar.php'; ?>
 
     <!-- Form -->
-    <form action="ingredients-form.php" method="post" autocomplete="off">
+    <form action="../actions/ingredients-form.php" method="post" autocomplete="off">
         <div class="container">
         <input type="hidden" name="id" value="<?php echo $ingredients['id']; ?>">
         <h4 class="pb-2 m-5">จัดการวัตถุดิบ</h4>
@@ -124,7 +124,7 @@ if (!empty($_GET['id'])) {
                             </td>
                             <td>
                                 <a role="button" href="admin-ingredients.php?id=<?php echo $product['id']; ?>" class="btn btn-outline-dark">Edit</a>
-                                <a onclick="return confirm('Are you sure you want to delete?');" role="button" href="ingredients-delete.php?id=<?php echo $product['id']; ?>" class="btn btn-outline-dark">Delete</a>
+                                <a onclick="return confirm('Are you sure you want to delete?');" role="button" href="../actions/ingredients-delete.php?id=<?php echo $product['id']; ?>" class="btn btn-outline-dark">Delete</a>
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -134,7 +134,7 @@ if (!empty($_GET['id'])) {
     </div>
     <!-- End Table -->
 
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 
 </html> 

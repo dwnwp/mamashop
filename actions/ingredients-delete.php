@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include 'config.php';
+    include '../config.php';
 
     if (!empty($_GET['id'])) {
         $query_ing = mysqli_query($conn, "SELECT * from ingredients where id='{$_GET['id']}'");
@@ -10,7 +10,7 @@
         mysqli_close($conn);
 
         if ($query) {
-            header('location: ' . $base_url . '/admin-ingredients.php');
+            header('location: ' . $base_url . '/pages/admin-ingredients.php');
         } else {
             die("Error delete ingredient");
             return;

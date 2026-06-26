@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include 'config.php';
+    include '../config.php';
 
     if (!empty($_GET['id'])) {
         $query_product = mysqli_query($conn, "SELECT * from products where id='{$_GET['id']}'");
@@ -12,10 +12,10 @@
 
         if ($query) {
             $_SESSION['message'] = "Product deleted success";
-            header('location: ' . $base_url . '/admin-menu.php');
+            header('location: ' . $base_url . '/pages/admin-menu.php');
         } else {
             $_SESSION['message'] = "Product could not be deleted";
-            header('location: ' . $base_url . '/admin-menu.php');
+            header('location: ' . $base_url . '/pages/admin-menu.php');
         }
     } 
 ?>

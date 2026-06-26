@@ -1,10 +1,10 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 
 // Check if login
 if(empty($_SESSION['login'])){
-    header("Location: " . $base_url . "/login.php");
+    header("Location: " . $base_url . "/pages/login.php");
 }
 // All orders
 $query = mysqli_query($conn, "SELECT * from orders order by id desc");
@@ -20,13 +20,13 @@ $rows = mysqli_num_rows($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Orders</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font.css">
 </head>
 
 <body>
 
-    <?php include 'admin-navbar.php'; ?>
+    <?php include '../admin-navbar.php'; ?>
 
     <!-- Table -->
     <div class="container mt-5">
@@ -57,7 +57,7 @@ $rows = mysqli_num_rows($query);
                                 <?php echo $orders['grand_total']; ?> ฿
                             </td>
                             <td>
-                                <a onclick="return confirm('Are you sure you want to delete?');" role="button" href="admin-order-delete.php?id=<?php echo $orders['id']; ?>" class="btn btn-outline-dark">Delete</a>
+                                <a onclick="return confirm('Are you sure you want to delete?');" role="button" href="../actions/admin-order-delete.php?id=<?php echo $orders['id']; ?>" class="btn btn-outline-dark">Delete</a>
                             </td>
                             <td>
                                 <div class="btn-group ms-2">
@@ -97,7 +97,7 @@ $rows = mysqli_num_rows($query);
         </table>
     </div>
     <!-- End Table -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 
 </html>

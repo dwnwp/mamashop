@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 
 $name = trim($_POST['name']);
 $name_en = trim($_POST['name_en']);
@@ -23,9 +23,9 @@ mysqli_close($conn);
 
 if ($query) {
 
-    header('location: ' . $base_url . '/admin-ingredients.php');
+    header('location: ' . $base_url . '/pages/admin-ingredients.php');
 } else {
     
-    header('location: ' . $base_url . '/admin-ingredients.php');
+    header('location: ' . $base_url . '/pages/admin-ingredients.php');
 }
 ?>

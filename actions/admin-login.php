@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include 'config.php';
+include '../config.php';
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -15,7 +15,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['login'] = "Login Successful";
             $_SESSION['loginMessage'] = null;
-            header('location: ' . $base_url . '/admin-menu.php');
+            header('location: ' . $base_url . '/pages/admin-menu.php');
             exit;
         }
     }
@@ -24,7 +24,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 if (isset($_SERVER["HTTP_REFERER"])) {
     header("Location: " . $_SERVER["HTTP_REFERER"]);
 } else {
-    header("Location: login.php");
+    header("Location: ../pages/login.php");
 }
 exit;
 ?>

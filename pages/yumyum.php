@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 // product all
 $query = mysqli_query($conn, "SELECT * from products  where brand='yumyum'");
 $rows = mysqli_num_rows($query);
@@ -14,7 +14,7 @@ if (!empty($_GET['id'])) {
     $row_product = mysqli_num_rows($query_product);
 
     if ($row_product == 0) {
-        header('location:' . $base_url . '/index.php');
+        header('location:' . $base_url . '/pages/home.php');
     }
     $result = mysqli_fetch_assoc($query_product);
 }
@@ -27,15 +27,15 @@ if (!empty($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <title>Yumyum</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font.css">
 </head>
 
 <body>
     
-    <?php include 'navbar.php'; ?>
+    <?php include '../navbar.php'; ?>
 
     <div class="container">
         <!-- Tabs -->
@@ -81,7 +81,7 @@ if (!empty($_GET['id'])) {
                                                                 } ?></h5>
                                 </div>
                             <?php else : ?>
-                                <a href="001.php?id=<?php echo $product['id']; ?>">
+                                <a href="product-detail.php?id=<?php echo $product['id']; ?>">
                                     <?php if (!empty($product['profile_image'])) : ?>
                                         <img src="<?php echo $base_url; ?>/img/<?php echo $product['profile_image']; ?>" class="card-img-top" alt="..." style="width:auto !important; height: 140px !important; margin: 0 auto 1em auto;">
                                     <?php else : ?>
@@ -107,6 +107,6 @@ if (!empty($_GET['id'])) {
 
 </body>
 
-<?php include'footer.php'; ?>
+<?php include '../footer.php'; ?>
 
 </html>

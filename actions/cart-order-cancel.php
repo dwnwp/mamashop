@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include 'config.php';
+include '../config.php';
 
 if (!empty($_GET['id'])) {
     $query = mysqli_query($conn, "DELETE FROM orders where id=$_GET[id]");
@@ -9,4 +9,4 @@ if (!empty($_GET['id'])) {
     $_SESSION['order']=null;
 }
 
-header('location: ' . $base_url . '/cart.php');
+header('location: ' . $base_url . '/pages/cart.php');

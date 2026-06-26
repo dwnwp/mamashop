@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 
 $result = ['id' => '', 'product_name' => '', 'price' => '', 'profile_image' => '', 'brand' => ''];
 
@@ -45,6 +45,6 @@ if($query){
     }
 }
 
-header('location: ' . $base_url . '/checkout.php?orderid=' . $last_id . '&ids=' . $ids);
+header('location: ' . $base_url . '/pages/checkout.php?orderid=' . $last_id . '&ids=' . $ids);
 
 ?>

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font.css">
 </head>
 
 
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <!-- Form -->
-                        <form action="admin-login.php" autocomplete="off" method="post">
+                        <form action="../actions/admin-login.php" autocomplete="off" method="post">
                             <div class="row gy-3 gy-md-4 overflow-hidden">
                                 <div class="col-12">
                                     <label for="username" class="form-label">Username <span class="text-danger">*</span></label>

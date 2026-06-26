@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include 'config.php';
+include '../config.php';
 
 $now = date('Y-m-d H:i:s');
 $query = mysqli_query($conn, "INSERT INTO orders(date_time, grand_total) VALUES('{$now}','{$_POST['grand_total']}');") or die("query unsuccessful");

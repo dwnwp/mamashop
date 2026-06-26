@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 // product all
 $query = mysqli_query($conn, "SELECT * from products  where brand='mama'");
 $rows = mysqli_num_rows($query);
@@ -13,16 +13,16 @@ $rows = mysqli_num_rows($query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <title>Mama</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font.css">
 
 </head>
 
 <body>
 
-    <?php include 'navbar.php'; ?>
+    <?php include '../navbar.php'; ?>
 
     <div class="container">
         <!-- Tabs -->
@@ -72,7 +72,7 @@ $rows = mysqli_num_rows($query);
                                                                 } ?></h5>
                                 </div>
                             <?php else : ?>
-                                <a href="001.php?id=<?php echo $product['id']; ?>">
+                                <a href="product-detail.php?id=<?php echo $product['id']; ?>">
                                     <?php if (!empty($product['profile_image'])) : ?>
                                         <img src="<?php echo $base_url; ?>/img/<?php echo $product['profile_image']; ?>" class="card-img-top" alt="..." style="width:auto !important; height: 140px !important; margin: 0 auto 1em auto;">
                                     <?php else : ?>
@@ -99,6 +99,6 @@ $rows = mysqli_num_rows($query);
 
 </body>
 
-<?php include 'footer.php'; ?>
+<?php include '../footer.php'; ?>
 
 </html>

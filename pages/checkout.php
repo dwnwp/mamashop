@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,10 +10,10 @@ include 'config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="20">
-    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
     <title>MamaShop</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font.css">
 </head>
 
 <body>
@@ -22,7 +22,7 @@ include 'config.php';
     $last_id = $_GET['orderid'];
     $ids = $_GET['ids'];
     $orders = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * from orders where id=$last_id"));
-    include 'navbar.php';
+    include '../navbar.php';
     ?>
 
     <!-- ยังไม่ชำระเงิน -->
@@ -36,7 +36,7 @@ include 'config.php';
                                                     } ?></h3>
                 <img src="https://www.paocloud.co.th/wp-content/uploads/2021/01/Screen-Shot-2564-01-26-at-18.56.53.png" class="img-fluid mt-5" alt="..." style="width:auto; height: 500px; margin-left: auto; margin-right:auto; display:block">
                 <div class="d-grid gap-2 col-6 mx-auto mt-4">
-                    <a href="cart-order-cancel.php?id=<?php echo $last_id; ?>" onclick="return confirm('Are you sure you want to cancel?');" class="btn btn-danger"><?php if ($_SESSION['lang'] == 'th') {
+                    <a href="../actions/cart-order-cancel.php?id=<?php echo $last_id; ?>" onclick="return confirm('Are you sure you want to cancel?');" class="btn btn-danger"><?php if ($_SESSION['lang'] == 'th') {
                                                                                                                                                                         echo "ยกเลิก";
                                                                                                                                                                     } elseif ($_SESSION['lang'] == 'en') {
                                                                                                                                                                         echo "Cancel";

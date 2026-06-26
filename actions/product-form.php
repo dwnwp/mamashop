@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../config.php';
 
 $product_name = trim($_POST['product_name']);
 $product_name_en = trim($_POST['product_name_en']);
@@ -35,9 +35,9 @@ if ($query) {
     move_uploaded_file($image_tmp, $image_location);
 
     $_SESSION['message'] = "Product saved success";
-    header('location: ' . $base_url . '/admin-menu.php');
+    header('location: ' . $base_url . '/pages/admin-menu.php');
 } else {
     $_SESSION['message'] = "Product could not be saved";
-    header('location: ' . $base_url . '/admin-menu.php');
+    header('location: ' . $base_url . '/pages/admin-menu.php');
 }
 ?>

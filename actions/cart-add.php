@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include 'config.php';
+include '../config.php';
 
 $query = mysqli_query($conn, "SELECT * FROM products WHERE id='{$_POST['id']}'");
 $result = mysqli_fetch_assoc($query);
@@ -47,4 +47,4 @@ if (!empty($_POST['id'])) {
     }
 }
 
-header('location: ' . $base_url . '/' . $result['brand'] . '.php');
+header('location: ' . $base_url . '/pages/' . $result['brand'] . '.php');
