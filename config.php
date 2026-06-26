@@ -7,4 +7,8 @@ $password = '';
 $db = 'shoppingcart';
 
 $conn = mysqli_connect($host, $user, $password, $db, 3308) or die('Connection Failed');
+
+if(empty($_SESSION['lang'])){
+    $_SESSION['lang'] = 'th';
+}
 ?>

@@ -10,11 +10,11 @@
         mysqli_close($conn);
 
         if ($query) {
-            $_SESSION['message'] = "Ingredients deleted success";
             header('location: ' . $base_url . '/admin-ingredients.php');
         } else {
-            $_SESSION['message'] = "Ingredients could not be deleted";
-            header('location: ' . $base_url . '/admin-ingredients.php');
+            die("Error delete ingredient");
+            return;
         }
     } 
+
 ?>

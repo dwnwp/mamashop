@@ -1,14 +1,18 @@
 <?php
 session_start();
 include 'config.php';
+// Check if login
+if(empty($_SESSION['login'])){
+    header("Location: " . $base_url . "/login.php");
+}
 // product all
 $query = mysqli_query($conn, "SELECT * from products order by brand, price desc");
 $rows = mysqli_num_rows($query);
 
-// variable for product form
-$result = ['id' => '', 'product_name' => '', 'price' => '', 'product_image' => '', 'brand' => ''];
+// variable
+$result = ['id' => '', 'product_name' => '', 'product_name_en' => '','price' => '', 'product_image' => '', 'brand' => '', 'stock' => ''];
 
-// product select edit
+// when press edit product 
 if (!empty($_GET['id'])) {
     $query_product = mysqli_query($conn, "select * from products where id='{$_GET['id']}'");
     $row_product = mysqli_num_rows($query_product);
@@ -27,38 +31,40 @@ if (!empty($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MamaShop</title>
+    <title>Admin - Menu</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font.css">
 </head>
 
 <body>
 
     <?php include 'admin-navbar.php'; ?>
 
-    <!-- Form Submit Alert -->
-    <?php if (!empty($_SESSION['message'])) : ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <?php echo $_SESSION['message']; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php unset($_SESSION['message']) ?>
-    <?php endif; ?>
-    <!-- End Form Submit Alert -->
-
     <!-- Form -->
     <form action="product-form.php" method="post" enctype="multipart/form-data" autocomplete="off">
+        <div class="container">
         <input type="hidden" name="id" value="<?php echo $result['id']; ?>">
-        <h4 class="pb-2 m-5">Manage Product</h4>
+        <h4 class="pb-2 m-5">จัดการอาหาร</h4>
         <!-- product_name -->
         <label class="form-label">
             Product Name:
             <input type="text" name="product_name" class="form-control" value="<?php echo $result['product_name']; ?>" required>
         </label>
+        <!-- product_name_en -->
+        <label class="form-label">
+            Product Name English:
+            <input type="text" name="product_name_en" class="form-control" value="<?php echo $result['product_name_en']; ?>" required>
+        </label>
         <!-- price -->
         <label class="form-label">
             Price:
-            <input type="text" name="price" class="form-control" value="<?php echo $result['price']; ?>" required>
+            <input type="number" min=0 name="price" class="form-control" value="<?php echo $result['price']; ?>" required>
+        </label>
+        <!-- Stock -->
+        <label class="form-label">
+            Stock:
+            <input type="number" min=0 name="stock" class="form-control" value="<?php echo $result['stock']; ?>" required>
         </label>
         <!-- profile_image -->
         <?php if (!empty($result['profile_image'])) : ?>
@@ -89,6 +95,7 @@ if (!empty($_GET['id'])) {
         <?php endif; ?>
         <a role="button" class="btn btn-secondary" href="<?php echo $base_url; ?>/admin-menu.php">Cancel</a>
         <hr class="my-4">
+        </div>
     </form>
     <!-- End Form -->
 
@@ -99,7 +106,9 @@ if (!empty($_GET['id'])) {
                 <tr>
                     <th>Image</th>
                     <th>Product Name</th>
+                    <th>Product Name English</th>
                     <th>Price</th>
+                    <th>Stock</th>
                     <th>Brand</th>
                     <th>Action</th>
                 </tr>
@@ -119,7 +128,13 @@ if (!empty($_GET['id'])) {
                                 <?php echo $product['product_name']; ?>
                             </td>
                             <td>
+                                <?php echo $product['product_name_en']; ?>
+                            </td>
+                            <td>
                                 <?php echo number_format($product['price'], 2); ?>
+                            </td>
+                            <td>
+                                <?php echo $product['stock']; ?>
                             </td>
                             <td>
                                 <?php echo $product['brand']; ?>
